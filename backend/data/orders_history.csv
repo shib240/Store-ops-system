@@ -1,0 +1,1 @@
+order_id,product_id,sku,name,supplier,qty_ordered,unit_cost,total_cost,order_date,expected_arrival,status,received_date

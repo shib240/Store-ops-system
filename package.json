@@ -1,0 +1,13 @@
+{
+  "name": "storeops-system",
+  "version": "1.0.0",
+  "description": "All-in-one store operations dashboard: POS, inventory replenishment, staff rostering, and click & collect fulfillment.",
+  "private": true,
+  "scripts": {
+    "start": "node backend/server.js",
+    "dev": "node backend/server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

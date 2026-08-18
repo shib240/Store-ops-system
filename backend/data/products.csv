@@ -1,0 +1,13 @@
+id,sku,name,category,supplier,unit_cost,sell_price,current_stock,reorder_point,reorder_qty,max_stock,lead_time_days
+1,WD-1001,Wireless Mouse,Peripherals,Logitech Direct,14.5,29.99,40,25,50,120,5
+2,WD-1002,Mechanical Keyboard,Peripherals,Logitech Direct,58,99.99,18,20,40,100,7
+3,WD-1003,USB-C Hub 7-in-1,Accessories,AnkerSupply Co,21.75,39.99,9,15,30,80,4
+4,WD-1004,27in Monitor,Displays,ViewSource Ltd,189,299,6,8,15,40,14
+5,WD-1005,Laptop Stand,Accessories,AnkerSupply Co,17.2,34.99,55,20,40,100,5
+6,WD-1006,Webcam 1080p,Peripherals,PixelWorks Inc,32.4,59.99,11,18,35,90,6
+7,WD-1007,Noise Cancelling Headphones,Audio,SoundBridge Corp,74.99,149,7,12,25,70,10
+8,WD-1008,Desk Mat XL,Accessories,AnkerSupply Co,12,24.99,63,20,40,100,4
+9,WD-1009,HDMI Cable 2m,Cables,CableCraft Supply,4.25,9.99,117,50,100,250,3
+10,WD-1010,Ergonomic Chair Cushion,Office,ComfortLine Goods,26.8,49.99,4,10,20,50,9
+11,WD-1011,Portable SSD 1TB,Storage,DataForge Inc,79.9,139,14,15,30,80,7
+12,WD-1012,Wireless Charger Pad,Accessories,PixelWorks Inc,19.3,34.99,29,20,40,100,5
