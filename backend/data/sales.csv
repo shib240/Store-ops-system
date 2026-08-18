@@ -1,0 +1,3 @@
+sale_id,transaction_id,product_id,sku,name,qty,unit_price,line_total,payment_method,cashier,timestamp
+1,1,1,WD-1001,Wireless Mouse,2,29.99,59.98,card,Priya Nathan,2026-08-18T07:33:24.175Z
+2,1,9,WD-1009,HDMI Cable 2m,3,9.99,29.97,card,Priya Nathan,2026-08-18T07:33:24.175Z
