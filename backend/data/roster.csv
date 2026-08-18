@@ -1,0 +1,10 @@
+shift_id,staff_id,name,role,date,start_time,end_time,status
+1,1,Amelia Ferris,Store Manager,2026-08-18,07:00,15:00,scheduled
+2,2,Jordan Blake,Duty Manager,2026-08-18,10:00,18:00,scheduled
+3,3,Priya Nathan,Checkout Lead,2026-08-18,08:00,16:00,scheduled
+4,4,Sam O'Connell,Checkout Operator,2026-08-18,12:00,20:00,scheduled
+5,5,Liam Torres,Stock Team,2026-08-18,05:00,13:00,scheduled
+6,6,Grace Whitmore,Stock Team,2026-08-18,13:00,21:00,scheduled
+7,7,Noah Kim,Click & Collect,2026-08-18,09:00,17:00,scheduled
+8,4,Sam O'Connell,Checkout Operator,2026-08-19,08:00,16:00,scheduled
+9,3,Priya Nathan,Checkout Lead,2026-08-19,08:00,16:00,scheduled
