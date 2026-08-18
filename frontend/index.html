@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STOREOPS // Control Terminal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<header class="topbar">
+  <div class="brand">
+    <span class="brand-mark">◈</span>
+    <div>
+      <div class="brand-title">STOREOPS<span class="brand-slash">//</span></div>
+      <div class="brand-sub">STORE OPERATIONS CONTROL TERMINAL</div>
+    </div>
+  </div>
+  <div class="conn-status" id="connStatus">
+    <span class="dot" id="connDot"></span>
+    <span id="connText">CONNECTING…</span>
+  </div>
+</header>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tab active" data-tab="overview">Overview</button>
+  <button class="tab" data-tab="pos">POS</button>
+  <button class="tab" data-tab="inventory">Inventory</button>
+  <button class="tab" data-tab="roster">Roster</button>
+  <button class="tab" data-tab="clickcollect">Click &amp; Collect</button>
+</nav>
+
+<main class="views">
+
+  <!-- ============ OVERVIEW ============ -->
+  <section class="view active" id="view-overview">
+    <section class="stat-strip" id="overviewStats">
+      <div class="stat-block">
+        <div class="stat-label">Revenue Today</div>
+        <div class="stat-value" id="ovRevenue">—</div>
+      </div>
+      <div class="stat-block">
+        <div class="stat-label">Transactions</div>
+        <div class="stat-value" id="ovTx">—</div>
+      </div>
+      <div class="stat-block ok">
+        <div class="stat-label">Staff On Shift</div>
+        <div class="stat-value" id="ovStaff">—</div>
+      </div>
+      <div class="stat-block crit">
+        <div class="stat-label">Critical Stock</div>
+        <div class="stat-value" id="ovCritical">—</div>
+      </div>
+      <div class="stat-block warn">
+        <div class="stat-label">Low Stock</div>
+        <div class="stat-value" id="ovLow">—</div>
+      </div>
+      <div class="stat-block info">
+        <div class="stat-label">Click&amp;Collect Open</div>
+        <div class="stat-value" id="ovCC">—</div>
+      </div>
+    </section>
+
+    <div class="grid-2">
+      <section class="panel">
+        <div class="panel-head"><h2>ON SHIFT NOW</h2></div>
+        <div id="ovOnShift" class="simple-list"><div class="loading-row">Loading…</div></div>
+      </section>
+      <section class="panel">
+        <div class="panel-head"><h2>TODAY AT A GLANCE</h2></div>
+        <div id="ovGlance" class="simple-list"><div class="loading-row">Loading…</div></div>
+      </section>
+    </div>
+  </section>
+
+  <!-- ============ POS ============ -->
+  <section class="view" id="view-pos">
+    <div class="grid-pos">
+      <section class="panel">
+        <div class="panel-head">
+          <h2>REGISTER <span class="panel-head-sub">// tap a SKU to add to basket</span></h2>
+        </div>
+        <div class="pos-grid" id="posGrid"><div class="loading-row">Loading products…</div></div>
+      </section>
+
+      <aside class="panel panel-side">
+        <div class="panel-head"><h2>BASKET</h2></div>
+        <div class="basket-list" id="basketList">
+          <div class="empty-note">Basket is empty. Tap a product to add it.</div>
+        </div>
+        <div class="basket-total-row">
+          <span>TOTAL</span>
+          <span id="basketTotal">$0.00</span>
+        </div>
+        <label class="field-label">Cashier
+          <select id="cashierSelect"><option value="">Select cashier…</option></select>
+        </label>
+        <label class="field-label">Payment
+          <select id="paymentSelect">
+            <option value="card">Card</option>
+            <option value="cash">Cash</option>
+            <option value="mobile">Mobile Wallet</option>
+          </select>
+        </label>
+        <button class="btn btn-primary btn-block" id="ringUpBtn">RING UP SALE</button>
+        <button class="btn btn-ghost btn-block" id="clearBasketBtn">CLEAR BASKET</button>
+
+        <div class="panel-head panel-head-tight"><h2>RECENT SALES</h2></div>
+        <div class="order-list" id="recentSales"><div class="empty-note">No sales yet.</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ INVENTORY ============ -->
+  <section class="view" id="view-inventory">
+    <section class="stat-strip" id="invStatStrip">
+      <div class="stat-block">
+        <div class="stat-label">SKUs Tracked</div>
+        <div class="stat-value" id="statTotal">—</div>
+      </div>
+      <div class="stat-block ok">
+        <div class="stat-label">Healthy</div>
+        <div class="stat-value" id="statHealthy">—</div>
+      </div>
+      <div class="stat-block warn">
+        <div class="stat-label">Low Stock</div>
+        <div class="stat-value" id="statLow">—</div>
+      </div>
+      <div class="stat-block crit">
+        <div class="stat-label">Critical</div>
+        <div class="stat-value" id="statCritical">—</div>
+      </div>
+      <div class="stat-block info">
+        <div class="stat-label">Pending POs</div>
+        <div class="stat-value" id="statPending">—</div>
+      </div>
+      <div class="stat-block info">
+        <div class="stat-label">PO Value</div>
+        <div class="stat-value" id="statPendingValue">—</div>
+      </div>
+    </section>
+
+    <div class="layout">
+      <section class="panel panel-main">
+        <div class="panel-head">
+          <h2>BIN LEVELS <span class="panel-head-sub">// live stock gauges</span></h2>
+          <button class="btn btn-ghost" id="addProductBtn">+ ADD SKU</button>
+        </div>
+        <div class="table-wrap">
+          <table class="stock-table">
+            <thead>
+              <tr>
+                <th>SKU</th><th>Item</th><th>Supplier</th><th>Gauge</th>
+                <th class="num">Stock</th><th class="num">ROP</th><th>Status</th>
+              </tr>
+            </thead>
+            <tbody id="productRows"><tr><td colspan="7" class="loading-row">Reading bin sensors…</td></tr></tbody>
+          </table>
+        </div>
+      </section>
+
+      <aside class="panel panel-side">
+        <div class="panel-head"><h2>REPLEN QUEUE <span class="panel-head-sub">// action required</span></h2></div>
+        <div class="queue-list" id="queueList"><div class="loading-row">Scanning thresholds…</div></div>
+
+        <div class="panel-head panel-head-tight"><h2>ORDER LOG</h2></div>
+        <div class="order-list" id="orderList"><div class="loading-row">No orders logged yet.</div></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ============ ROSTER ============ -->
+  <section class="view" id="view-roster">
+    <section class="panel">
+      <div class="panel-head">
+        <h2>ROSTER <span class="panel-head-sub" id="rosterDateLabel">// today</span></h2>
+        <div class="panel-head-actions">
+          <input type="date" id="rosterDatePicker" class="date-input">
+          <button class="btn btn-ghost" id="addShiftBtn">+ ADD SHIFT</button>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table class="stock-table">
+          <thead>
+            <tr><th>Staff</th><th>Role</th><th class="num">Start</th><th class="num">End</th><th>Status</th><th></th></tr>
+          </thead>
+          <tbody id="rosterRows"><tr><td colspan="6" class="loading-row">Loading roster…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <div class="panel-head"><h2>STAFF DIRECTORY</h2></div>
+      <div class="table-wrap">
+        <table class="stock-table">
+          <thead><tr><th>Name</th><th>Role</th><th class="num">Rate/hr</th><th>Phone</th></tr></thead>
+          <tbody id="staffRows"><tr><td colspan="4" class="loading-row">Loading staff…</td></tr></tbody>
+        </table>
+      </div>
+    </section>
+  </section>
+
+  <!-- ============ CLICK & COLLECT ============ -->
+  <section class="view" id="view-clickcollect">
+    <div class="cc-page-head">
+      <h2>CLICK &amp; COLLECT <span class="panel-head-sub">// fulfillment queue</span></h2>
+      <button class="btn btn-ghost" id="addCCOrderBtn">+ NEW ORDER</button>
+    </div>
+    <div class="cc-board" id="ccBoard">
+      <div class="cc-column" data-status="pending"><div class="cc-column-head">PENDING</div><div class="cc-column-body" id="ccCol-pending"></div></div>
+      <div class="cc-column" data-status="picking"><div class="cc-column-head">PICKING</div><div class="cc-column-body" id="ccCol-picking"></div></div>
+      <div class="cc-column" data-status="ready"><div class="cc-column-head">READY</div><div class="cc-column-body" id="ccCol-ready"></div></div>
+      <div class="cc-column" data-status="collected"><div class="cc-column-head">COLLECTED</div><div class="cc-column-body" id="ccCol-collected"></div></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- Add SKU modal -->
+<div class="modal-backdrop" id="modalBackdrop">
+  <form class="modal" id="addProductForm">
+    <div class="modal-title">REGISTER NEW SKU</div>
+    <div class="modal-grid">
+      <label>SKU <input name="sku" required placeholder="WD-1013"></label>
+      <label>Name <input name="name" required placeholder="Item name"></label>
+      <label>Category <input name="category" placeholder="Accessories"></label>
+      <label>Supplier <input name="supplier" placeholder="Supplier Co"></label>
+      <label>Unit Cost <input name="unit_cost" type="number" step="0.01" required placeholder="19.99"></label>
+      <label>Sell Price <input name="sell_price" type="number" step="0.01" required placeholder="34.99"></label>
+      <label>Current Stock <input name="current_stock" type="number" required placeholder="30"></label>
+      <label>Reorder Point <input name="reorder_point" type="number" required placeholder="15"></label>
+      <label>Reorder Qty <input name="reorder_qty" type="number" required placeholder="40"></label>
+      <label>Max Stock <input name="max_stock" type="number" required placeholder="100"></label>
+      <label>Lead Time (days) <input name="lead_time_days" type="number" required placeholder="5"></label>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" data-close-modal>CANCEL</button>
+      <button type="submit" class="btn btn-primary">REGISTER</button>
+    </div>
+  </form>
+</div>
+
+<!-- Add shift modal -->
+<div class="modal-backdrop" id="shiftModalBackdrop">
+  <form class="modal" id="addShiftForm">
+    <div class="modal-title">SCHEDULE SHIFT</div>
+    <div class="modal-grid">
+      <label>Staff
+        <select name="staff_id" id="shiftStaffSelect" required></select>
+      </label>
+      <label>Date <input name="date" type="date" required></label>
+      <label>Start Time <input name="start_time" type="time" required></label>
+      <label>End Time <input name="end_time" type="time" required></label>
+    </div>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" data-close-modal>CANCEL</button>
+      <button type="submit" class="btn btn-primary">SCHEDULE</button>
+    </div>
+  </form>
+</div>
+
+<!-- New click & collect order modal -->
+<div class="modal-backdrop" id="ccModalBackdrop">
+  <form class="modal modal-wide" id="addCCOrderForm">
+    <div class="modal-title">NEW CLICK &amp; COLLECT ORDER</div>
+    <div class="modal-grid">
+      <label>Customer Name <input name="customer_name" required placeholder="Jane Smith"></label>
+      <label>Phone <input name="customer_phone" placeholder="0400 000 000"></label>
+      <label>Requested Time <input name="requested_time" type="datetime-local"></label>
+    </div>
+    <div class="cc-items-editor" id="ccItemsEditor"></div>
+    <button type="button" class="btn btn-ghost btn-sm" id="addCCItemRow">+ ADD ITEM</button>
+    <div class="modal-actions">
+      <button type="button" class="btn btn-ghost" data-close-modal>CANCEL</button>
+      <button type="submit" class="btn btn-primary">CREATE ORDER</button>
+    </div>
+  </form>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
