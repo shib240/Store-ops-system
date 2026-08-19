@@ -187,15 +187,6 @@ git push -u origin main
 Create the repo first at github.com/new — leave it empty (no README, no
 `.gitignore`), since this project already has both.
 
-### 2. Make the repo portfolio-ready
-
-- **Pin it** on your GitHub profile (Profile → Customize your pins).
-- **Add topics**: `nodejs`, `retail`, `point-of-sale`, `inventory-management`,
-  `dashboard`.
-- **Fill in the "About" section** with a one-line description and, once
-  deployed, a live demo link.
-- This README renders on the repo's homepage — the screenshots above are a
-  good first impression, but swap in your own once you've customized data.
 
 ### 3. Deploy it for a working live demo
 
